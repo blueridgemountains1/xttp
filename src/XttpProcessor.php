@@ -13,13 +13,13 @@ class XttpProcessor implements ProcessesXttpRequests
     protected $data = [];
 
     /**
-     * @param  \JohnathanSmith\Xttp\XttpPending  $xttpPending
+     * @param  \JohnathanSmith\Xttp\MakesXttpPending  $xttpPending
      * @param  \GuzzleHttp\ClientInterface|null|Client  $client
      *
      * @return \JohnathanSmith\Xttp\XttpResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function process(XttpPending $xttpPending, ClientInterface $client)
+    public function process(MakesXttpPending $xttpPending, ClientInterface $client)
     {
         $guzzleResponse = $this->makeGuzzleRequest($xttpPending, $client);
 
@@ -31,13 +31,13 @@ class XttpProcessor implements ProcessesXttpRequests
     }
 
     /**
-     * @param  \JohnathanSmith\Xttp\XttpPending  $xttpPending
+     * @param  \JohnathanSmith\Xttp\MakesXttpPending  $xttpPending
      * @param  \GuzzleHttp\ClientInterface  $client
      *
      * @return \Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function makeGuzzleRequest(XttpPending $xttpPending, ClientInterface $client): ResponseInterface
+    protected function makeGuzzleRequest(MakesXttpPending $xttpPending, ClientInterface $client): ResponseInterface
     {
         return $client->request(
             $xttpPending->getMethod(),
@@ -55,7 +55,7 @@ class XttpProcessor implements ProcessesXttpRequests
         return $response;
     }
 
-    public function makeOptions(XttpPending $xttpPending): array
+    public function makeOptions(MakesXttpPending $xttpPending): array
     {
         $url = $xttpPending->getUrl();
 

@@ -14,7 +14,7 @@ class Xttp implements HandlesXttp
         array $options = [],
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
-        XttpPending $pending = null
+        MakesXttpPending $pending = null
     ): XttpResponse {
         return self::makeRequest('POST', $url, $options, $client, $processesXttpRequests, $pending);
     }
@@ -25,7 +25,7 @@ class Xttp implements HandlesXttp
         array $options = [],
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
-        XttpPending $pending = null
+        MakesXttpPending $pending = null
     ): XttpResponse {
         if (static::hasMacro('req')) {
             return self::req($method, $url, $options, $client, $processesXttpRequests);
@@ -42,7 +42,7 @@ class Xttp implements HandlesXttp
         array $options = [],
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
-        XttpPending $pending = null
+        MakesXttpPending $pending = null
     ): XttpResponse {
         return self::makeRequest('PATCH', $url, $options, $client, $processesXttpRequests, $pending);
     }
@@ -52,7 +52,7 @@ class Xttp implements HandlesXttp
         array $options = [],
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
-        XttpPending $pending = null
+        MakesXttpPending $pending = null
     ): XttpResponse {
         return self::makeRequest('PUT', $url, $options, $client, $processesXttpRequests, $pending);
     }
@@ -62,7 +62,7 @@ class Xttp implements HandlesXttp
         array $options = [],
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
-        XttpPending $pending = null
+        MakesXttpPending $pending = null
     ): XttpResponse {
         return self::makeRequest('DELETE', $url, $options, $client, $processesXttpRequests, $pending);
     }
@@ -72,7 +72,7 @@ class Xttp implements HandlesXttp
         array $options = [],
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
-        XttpPending $pending = null
+        MakesXttpPending $pending = null
     ): XttpResponse {
         return self::makeRequest('GET', $url, $options, $client, $processesXttpRequests, $pending);
     }

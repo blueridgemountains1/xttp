@@ -6,7 +6,7 @@ use GuzzleHttp\ClientInterface;
 
 interface ProcessesXttpRequests
 {
-    public function process(XttpPending $xttpPending, ClientInterface $client);
+    public function process(MakesXttpPending $xttpPending, ClientInterface $client);
 
-    public function makeOptions(XttpPending $xttpPending): array;
+    public function makeOptions(MakesXttpPending $xttpPending): array;
 }
