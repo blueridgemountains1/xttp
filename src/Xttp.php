@@ -3,11 +3,9 @@
 namespace JohnathanSmith\Xttp;
 
 use GuzzleHttp\ClientInterface;
-use Illuminate\Support\Traits\Macroable;
 
 class Xttp implements HandlesXttp
 {
-    use Macroable;
 
     public static function post(
         string $url,

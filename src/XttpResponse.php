@@ -2,15 +2,12 @@
 
 namespace JohnathanSmith\Xttp;
 
-use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
 class XttpResponse
 {
-    use Macroable;
-
     /** @var \GuzzleHttp\Cookie\CookieJar */
     public $cookies;
 

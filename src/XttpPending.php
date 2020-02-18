@@ -9,13 +9,10 @@ use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 
 class XttpPending implements MakesXttpPending
 {
-    use Macroable;
-
     /** @var array */
     protected const METHODS = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'];
 
