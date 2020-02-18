@@ -12,7 +12,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 
-class XttpPending
+class XttpPending implements MakesXttpPending
 {
     use Macroable;
 
