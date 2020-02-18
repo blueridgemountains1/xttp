@@ -27,7 +27,6 @@ class Xttp implements HandlesXttp
         ProcessesXttpRequests $processesXttpRequests = null,
         XttpPending $pending = null
     ): XttpResponse {
-
         if (static::hasMacro('req')) {
             return self::req($method, $url, $options, $client, $processesXttpRequests);
         }

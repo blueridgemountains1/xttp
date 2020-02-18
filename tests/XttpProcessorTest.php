@@ -61,12 +61,12 @@ class XttpProcessorTest extends TestCase
     }
 
     /** @test */
-    public function processes_guzzle_request_as_json() {
-
+    public function processes_guzzle_request_as_json()
+    {
         $body = [
             'johnathan' => 'smith',
             'xttp' => [
-                [1,2,3],
+                [1, 2, 3],
                 'response',
             ],
         ];
@@ -87,6 +87,5 @@ class XttpProcessorTest extends TestCase
         $this->assertEquals($body, $r->json());
 
         $this->assertEquals($bodyJson, $r->body());
-
     }
 }

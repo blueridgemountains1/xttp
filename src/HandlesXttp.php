@@ -2,8 +2,6 @@
 
 namespace JohnathanSmith\Xttp;
 
-use GuzzleHttp\ClientInterface;
-
 interface HandlesXttp
 {
     public static function post(string $url, array $options = []): XttpResponse;

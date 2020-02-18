@@ -9,13 +9,12 @@ use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 
 class XttpPending
 {
-    use \Illuminate\Support\Traits\Macroable {
-        __call as macroCall;
-    }
+    use Macroable;
 
     /** @var array */
     protected const METHODS = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'];
@@ -345,7 +344,7 @@ class XttpPending
         return $this->bodyFormat;
     }
 
-    protected function setBodyFormat(string $bodyFormat = 'json'): self
+    public function setBodyFormat(string $bodyFormat = 'json'): self
     {
         $this->bodyFormat = $bodyFormat;
 
@@ -409,14 +408,5 @@ class XttpPending
         $guzzleOptions = array_merge($localOptions, $this->options);
 
         return new Client($guzzleOptions);
-    }
-
-    public function __call($method, $args)
-    {
-        if (static::hasMacro($method)) {
-            return $this->macroCall($method, $args);
-        }
-
-        throw new InvalidArgumentException("Method {$method} does not exist on object");
     }
 }
