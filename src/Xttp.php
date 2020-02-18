@@ -6,14 +6,13 @@ use GuzzleHttp\ClientInterface;
 
 class Xttp implements HandlesXttp
 {
-
     public static function post(
         string $url,
         array $options = [],
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
         MakesXttpPending $pending = null
-    ): XttpResponse {
+    ): XttpResponseWrapper {
         return self::makeRequest('POST', $url, $options, $client, $processesXttpRequests, $pending);
     }
 
@@ -24,11 +23,7 @@ class Xttp implements HandlesXttp
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
         MakesXttpPending $pending = null
-    ): XttpResponse {
-        if (static::hasMacro('req')) {
-            return self::req($method, $url, $options, $client, $processesXttpRequests);
-        }
-
+    ): XttpResponseWrapper {
         return ($pending ?? XttpPending::new())->setUrl($url)
             ->setMethod($method)
             ->setOptions($options)
@@ -41,7 +36,7 @@ class Xttp implements HandlesXttp
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
         MakesXttpPending $pending = null
-    ): XttpResponse {
+    ): XttpResponseWrapper {
         return self::makeRequest('PATCH', $url, $options, $client, $processesXttpRequests, $pending);
     }
 
@@ -51,7 +46,7 @@ class Xttp implements HandlesXttp
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
         MakesXttpPending $pending = null
-    ): XttpResponse {
+    ): XttpResponseWrapper {
         return self::makeRequest('PUT', $url, $options, $client, $processesXttpRequests, $pending);
     }
 
@@ -61,7 +56,7 @@ class Xttp implements HandlesXttp
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
         MakesXttpPending $pending = null
-    ): XttpResponse {
+    ): XttpResponseWrapper {
         return self::makeRequest('DELETE', $url, $options, $client, $processesXttpRequests, $pending);
     }
 
@@ -71,7 +66,7 @@ class Xttp implements HandlesXttp
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null,
         MakesXttpPending $pending = null
-    ): XttpResponse {
+    ): XttpResponseWrapper {
         return self::makeRequest('GET', $url, $options, $client, $processesXttpRequests, $pending);
     }
 }

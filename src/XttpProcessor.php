@@ -16,7 +16,7 @@ class XttpProcessor implements ProcessesXttpRequests
      * @param  \JohnathanSmith\Xttp\MakesXttpPending  $xttpPending
      * @param  \GuzzleHttp\ClientInterface|null|Client  $client
      *
-     * @return \JohnathanSmith\Xttp\XttpResponse
+     * @return XttpResponseWrapper
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function process(MakesXttpPending $xttpPending, ClientInterface $client)
@@ -46,7 +46,7 @@ class XttpProcessor implements ProcessesXttpRequests
         );
     }
 
-    protected function makeXttpResponse(ResponseInterface $guzzleResponse): XttpResponse
+    protected function makeXttpResponse(ResponseInterface $guzzleResponse): XttpResponseWrapper
     {
         $response = new XttpResponse($guzzleResponse);
 

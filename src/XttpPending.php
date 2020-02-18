@@ -146,13 +146,13 @@ class XttpPending implements MakesXttpPending
      * @param  \JohnathanSmith\Xttp\ProcessesXttpRequests|null|\JohnathanSmith\Xttp\XttpProcessor  $processesXttpRequests
      * @param  \GuzzleHttp\ClientInterface|null|Client  $client
      *
-     * @return \JohnathanSmith\Xttp\XttpResponse
+     * @return XttpResponseWrapper
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function process(
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null
-    ): XttpResponse {
+    ): XttpResponseWrapper {
         return ($processesXttpRequests ?? new XttpProcessor())->process($this, $client ?? $this->getClient());
     }
 

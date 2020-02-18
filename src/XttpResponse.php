@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
-class XttpResponse
+class XttpResponse implements XttpResponseWrapper
 {
     /** @var \GuzzleHttp\Cookie\CookieJar */
     public $cookies;
