@@ -1,2 +1,5 @@
 /vendor/
 .idea
+/lsp
+.php_cs.cache
+.phpunit.result.cache
