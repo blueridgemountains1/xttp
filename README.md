@@ -16,6 +16,8 @@ $xttpResponse = Xttp::post('https://johnathansmith.com', ['form_params' => ['foo
 // You may also do get, put, patch, delete.
 ```
 
+There is also a [package for Laravel](https://github.com/jr-smith/xttp-laravel).
+
 After making the request you will get an instance of `XttpResponse`. This
 has a lot of syntactic sugar, for example:
 - Getting header/s
