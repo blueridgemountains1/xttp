@@ -1,5 +1,7 @@
 # xttp
 
+![](https://johnathansmith.com/uploads/xttp-logo-white.png)
+
 ### A guzzle wrapper with typehints and syntactic sugar. 
 
 Regular use is simple:
