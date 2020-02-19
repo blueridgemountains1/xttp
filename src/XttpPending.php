@@ -45,13 +45,13 @@ class XttpPending implements MakesXttpPending
         $this->asJson();
     }
 
-    public function asJson(): self
+    public function asJson(): MakesXttpPending
     {
         return $this->setBodyFormat('json')
             ->contentType('application/json');
     }
 
-    public function contentType(string $contentType): self
+    public function contentType(string $contentType): MakesXttpPending
     {
         $this->options['headers']['Content-Type'] = $contentType;
 
@@ -65,7 +65,7 @@ class XttpPending implements MakesXttpPending
      */
     public static function new(
         HandlesXttpCookies $cookies = null
-    ): self {
+    ): MakesXttpPending {
         return new static(
             $cookies ?? new XttpCookies(new CookieJar())
         );
@@ -82,7 +82,7 @@ class XttpPending implements MakesXttpPending
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): MakesXttpPending
     {
         $method = strtoupper($method);
         if (! in_array($method, self::METHODS, true)) {
@@ -98,7 +98,7 @@ class XttpPending implements MakesXttpPending
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url): MakesXttpPending
     {
         $this->url = $url;
 
@@ -110,7 +110,7 @@ class XttpPending implements MakesXttpPending
         return $this->options;
     }
 
-    public function setOptions(iterable $options): self
+    public function setOptions(iterable $options): MakesXttpPending
     {
         $this->options = (array) $options;
 
@@ -122,7 +122,7 @@ class XttpPending implements MakesXttpPending
         return $this->options[$key] ?? null;
     }
 
-    public function addOption(iterable $option): self
+    public function addOption(iterable $option): MakesXttpPending
     {
         $this->options = array_merge(
             $this->options,
@@ -132,7 +132,7 @@ class XttpPending implements MakesXttpPending
         return $this;
     }
 
-    public function addHeader(iterable $header): self
+    public function addHeader(iterable $header): MakesXttpPending
     {
         $this->options['headers'] = array_merge(
             $this->options['headers'] ?? [],
@@ -162,7 +162,7 @@ class XttpPending implements MakesXttpPending
      *
      * @return \JohnathanSmith\Xttp\XttpPending
      */
-    public function withRequestMiddleware($middlewares, $prepend = false): self
+    public function withRequestMiddleware($middlewares, $prepend = false): MakesXttpPending
     {
         return $this->loopMiddleware($middlewares, 'request', $prepend);
     }
@@ -181,7 +181,7 @@ class XttpPending implements MakesXttpPending
      *
      * @return \JohnathanSmith\Xttp\XttpPending
      */
-    public function withResponseMiddleware($middlewares, $prepend = false): self
+    public function withResponseMiddleware($middlewares, $prepend = false): MakesXttpPending
     {
         return $this->loopMiddleware($middlewares, 'response', $prepend);
     }
@@ -192,14 +192,14 @@ class XttpPending implements MakesXttpPending
      *
      * @return $this
      */
-    public function withMiddleware($middlewares, $prepend = false)
+    public function withMiddleware($middlewares, $prepend = false): MakesXttpPending
     {
         $this->loopMiddleware($middlewares, null, $prepend);
 
         return $this;
     }
 
-    public function withRetryMiddleware(Closure $decider, Closure $delay): self
+    public function withRetryMiddleware(Closure $decider, Closure $delay): MakesXttpPending
     {
         return $this->withMiddleware(Middleware::retry($decider, $delay));
     }
@@ -234,28 +234,28 @@ class XttpPending implements MakesXttpPending
         }
     }
 
-    public function clearMiddleware(): self
+    public function clearMiddleware(): MakesXttpPending
     {
         $this->middleware = [];
 
         return $this;
     }
 
-    public function withoutRedirecting(): self
+    public function withoutRedirecting(): MakesXttpPending
     {
         $this->options['allow_redirects'] = false;
 
         return $this;
     }
 
-    public function withoutVerifying(): self
+    public function withoutVerifying(): MakesXttpPending
     {
         $this->options['verify'] = false;
 
         return $this;
     }
 
-    public function asMultipart(): self
+    public function asMultipart(): MakesXttpPending
     {
         return $this->setBodyFormat('multipart');
     }
@@ -270,25 +270,25 @@ class XttpPending implements MakesXttpPending
         return $this->options['headers'] ?? [];
     }
 
-    public function setHeaders(iterable $headers): self
+    public function setHeaders(iterable $headers): MakesXttpPending
     {
         $this->options['headers'] = (array) $headers;
 
         return $this;
     }
 
-    public function asFormParams(): self
+    public function asFormParams(): MakesXttpPending
     {
         return $this->setBodyFormat('form_params')
             ->contentType('application/x-www-form-urlencoded');
     }
 
-    public function accept(string $header): self
+    public function accept(string $header): MakesXttpPending
     {
         return $this->withHeaders(['Accept' => $header]);
     }
 
-    public function withHeaders(iterable $headers): self
+    public function withHeaders(iterable $headers): MakesXttpPending
     {
         $this->options = array_merge_recursive($this->options, [
             'headers' => (array) $headers,
@@ -297,21 +297,21 @@ class XttpPending implements MakesXttpPending
         return $this;
     }
 
-    public function withBasicAuth($username, $password): self
+    public function withBasicAuth($username, $password): MakesXttpPending
     {
         $this->options['auth'] = [$username, $password];
 
         return $this;
     }
 
-    public function withDigestAuth($username, $password): self
+    public function withDigestAuth($username, $password): MakesXttpPending
     {
         $this->options['auth'] = [$username, $password, 'digest'];
 
         return $this;
     }
 
-    public function withCookies(iterable $cookies, string $domain = '/'): self
+    public function withCookies(iterable $cookies, string $domain = '/'): MakesXttpPending
     {
         $this->cookies->add($cookies, $this->getDomain() ?? $domain);
 
@@ -329,7 +329,7 @@ class XttpPending implements MakesXttpPending
         return parse_url($this->url, PHP_URL_HOST);
     }
 
-    public function timeout(int $seconds): self
+    public function timeout(int $seconds): MakesXttpPending
     {
         $this->options['timeout'] = $seconds;
 
@@ -341,7 +341,7 @@ class XttpPending implements MakesXttpPending
         return $this->bodyFormat;
     }
 
-    public function setBodyFormat(string $bodyFormat = 'json'): self
+    public function setBodyFormat(string $bodyFormat = 'json'): MakesXttpPending
     {
         $this->bodyFormat = $bodyFormat;
 
@@ -358,28 +358,28 @@ class XttpPending implements MakesXttpPending
         return $this->cookies->all();
     }
 
-    public function withMock(MockHandler $mockHandler): self
+    public function withMock(MockHandler $mockHandler): MakesXttpPending
     {
         $this->stack = HandlerStack::create($mockHandler);
 
         return $this;
     }
 
-    public function withHistory(array &$container): self
+    public function withHistory(array &$container): MakesXttpPending
     {
         $this->middleware[] = Middleware::history($container);
 
         return $this;
     }
 
-    public function withStack(HandlerStack $handlerStack): self
+    public function withStack(HandlerStack $handlerStack): MakesXttpPending
     {
         $this->stack = $handlerStack;
 
         return $this;
     }
 
-    public function makeStack(): self
+    public function makeStack(): MakesXttpPending
     {
         foreach ($this->middleware as $middleware) {
             $this->stack->push($middleware);
