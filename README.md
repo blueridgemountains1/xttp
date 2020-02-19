@@ -7,7 +7,7 @@ Regular use is simple:
 <?php
 use JohnathanSmith\Xttp\Xttp;
 
-/** @var \JohnathanSmith\Xttp\XttpResponse $xttpResponse */
+/** @var \JohnathanSmith\Xttp\XttpResponseWrapper $xttpResponse */
 
 $xttpResponse = Xttp::post('https://johnathansmith.com', ['form_params' => ['foo' => 'bar'], 'headers' => ['Content-Type' => 'application/x-www-form-urlencoded']]);
 
