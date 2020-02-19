@@ -45,7 +45,7 @@ class XttpProcessorTest extends TestCase
             ->withMock($mock)
             ->withHistory($container)
             ->setUrl($url)
-            ->process();
+            ->send();
 
         $this->assertEquals($body, $r->body());
         $this->assertEquals($headerVal, $r->header($headerKey));
@@ -80,7 +80,7 @@ class XttpProcessorTest extends TestCase
         $r = $this->xttpPending
             ->withCookies(['John' => 'Smith'])
             ->withMock($mock)
-            ->process();
+            ->send();
 
         $this->assertEquals([], $r->headers());
 
