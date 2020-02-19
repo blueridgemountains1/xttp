@@ -27,7 +27,7 @@ class Xttp implements HandlesXttp
         return ($pending ?? XttpPending::new())->setUrl($url)
             ->setMethod($method)
             ->setOptions($options)
-            ->process($client, $processesXttpRequests);
+            ->send($client, $processesXttpRequests);
     }
 
     public static function patch(

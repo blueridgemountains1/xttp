@@ -45,7 +45,7 @@ $response = XttpPending::new()
 ->setMethod(// method)
 ->withHeaders(['X-Foo' => 'Bar'])
 ->asJson()
-->process();
+->send();
 ```
 
 

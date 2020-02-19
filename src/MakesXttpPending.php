@@ -39,7 +39,7 @@ interface MakesXttpPending
      * @return XttpResponseWrapper
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function process(
+    public function send(
         ClientInterface $client = null,
         ProcessesXttpRequests $processesXttpRequests = null
     ): XttpResponseWrapper;
