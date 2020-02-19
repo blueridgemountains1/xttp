@@ -1,5 +1,7 @@
 {
   "name": "johnathan-smith/xttp",
+  "description": "A guzzle wrapper with typehints and syntactic sugar.",
+  "homepage": "https://johnathansmith.com/xttp",
   "license": "mit",
   "keywords": [
     "guzzle",
@@ -11,7 +13,8 @@
   "authors": [
     {
       "name": "Johnathan Ray Smith",
-      "email": "jr-smith@users.noreply.github.com"
+      "email": "jr-smith@users.noreply.github.com",
+      "homepage": "https://johnathansmith.com"
     }
   ],
   "autoload": {
